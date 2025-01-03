@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build: "."
+    container_name: taskmanager-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+        POSTGRES_PASSWORD: qwerty
+
+
+  db:
+    image: postgres:15
+    container_name: taskmanager-db
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: qwerty
+    ports:
+      - "5436:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+
+volumes:
+  pgdata:
